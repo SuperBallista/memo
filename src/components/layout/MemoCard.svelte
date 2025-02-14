@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import type { memoType } from "../../lib/store/memoStore";
-    import { moveToMemo } from "../../lib/store/viewStore";
+    import { moveToPage } from "../../lib/store/viewStore";
 
 export let memo:memoType
 let isMobile = false; // 모바일 여부 감지
@@ -25,7 +25,8 @@ const truncateContent = (content: string) => {
 </script>
 
 
-<div class="transition-transform transform hover:-translate-y-1 hover:shadow-lg cursor-pointer bg-card p-4 md:p-5 bg-cardBg shadow-md rounded-lg flex flex-col" on:click={() => moveToMemo(memo.id)}>
+<div class="transition-transform transform hover:-translate-y-1 hover:shadow-lg cursor-pointer bg-card p-4 md:p-5 bg-cardBg shadow-md rounded-lg flex flex-col"
+on:click={() => moveToPage("memo",memo.id)}>
     <h3 class="font-semibold text-lg md:text-2xl text-sub1">{memo.title}</h3>
     <p class="text-default text-sm md:text-lg overflow-hidden content-text">
       {@html truncateContent(memo.content)}

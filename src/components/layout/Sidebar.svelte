@@ -71,7 +71,7 @@
   
   <!-- 📌 PC용 사이드바 (헤더 아래 고정) -->
   <div class="fixed hidden lg:flex flex-col w-64 h-screen text-default shadow-lg top-0 left-0 bg-card text-white overflow-y-auto">
-    <div class="h-16"></div>
+    <div class="h-24"></div>
     <div class="p-5 text-xl font-semibold cursor-pointer" on:click={()=>{view.set("summary")}}>내 메모</div>
     <nav class="flex-1 px-2 space-y-2">
       <ul>

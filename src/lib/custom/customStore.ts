@@ -48,7 +48,7 @@ export const messageType = writable<"error" | "confirm" | "alert" | "loading" | 
 export const messageTitle = writable<string>("");
 export const messageContent = writable<string>("");
 export const messageColor = writable<string>("#3498db");
-export const messageInputs = writable<{ key: string; label: string; type?: string; placeholder?: string }[]>([]);
+export const messageInputs = writable<{ key: string; label: string; type?: string; placeholder?: string, value: any }[]>([]);
 export const messageResolve = writable<((res: { success: boolean; values?: Record<string, string> }) => void) | null>(null);
 export const messageIcon = writable<string | null>(null); // ✅ 아이콘을 직접 저장
 
@@ -67,19 +67,25 @@ const messageIcons = {
     title?: string;
     message?: string;
     color?: string;
-    inputs?:  { key: string; label: string; type?: string; placeholder?: string }[];
+    inputs?:  { key: string; label: string; type?: string; placeholder?: string, value: any }[];
   };
   
   type MessageBoxResponse = { success: boolean; values?: Record<string, string> };
     
-  export function showMessageBox(type:"error" | "confirm" | "alert" | "loading" | "input" | "success", title: string, message: string, color?: string, inputs?: { key: string; label: string; type?: string; placeholder?: string }[] ): Promise<MessageBoxResponse> {
+  export function showMessageBox(type:"error" | "confirm" | "alert" | "loading" | "input" | "success", title: string, message: string, color?: string, inputs?: { key: string; label: string; type?: string; value?:any, placeholder?: string }[] ): Promise<MessageBoxResponse> {
     return new Promise((resolve) => {
       isOpen.set(true);
       messageType.set(type ?? null);
       messageTitle.set(title ?? "제목 없음"); 
       messageContent.set(message ?? "메세지가 없습니다");
       messageColor.set(color ?? "#1e1e2f");
-      messageInputs.set(inputs ?? []);
+
+    // 🟢 입력값을 포함하여 messageInputs에 저장
+    messageInputs.set(inputs?.map(input => ({
+      ...input,
+      value: input.value ?? "" // 초기값 설정
+    })) ?? []);
+
       messageResolve.set(resolve);
       messageIcon.set(messageIcons[type] ?? null);
       if (type === "success") {

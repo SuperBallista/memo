@@ -4,5 +4,5 @@
     "composite": true,
     "outDir": "./dist"
   },
-  "include": ["src", "src/defaultData/**/*.json"]
+  "include": ["src", "src/defaultData/**/*.json", "src/lib/custom/config/messageBoxColor.json"]
 }

@@ -1,10 +1,20 @@
 <!-- 📌 PC 네비게이션 (검색창 오른쪽) -->
 <div class="nav-container">
-  <button class="nav-btn" data-tooltip="달력">📅</button>
+  <button class="nav-btn" on:click={() => {moveToPage("calendar",0)}} data-tooltip="달력">📅</button>
   <button class="nav-btn" data-tooltip="학생">🎓</button>
   <button class="nav-btn" data-tooltip="도구">🔧</button>
   <button class="nav-btn" data-tooltip="설정">⚙️</button>
 </div>
+
+<script lang="ts">
+    import { moveToPage } from "../../lib/store/viewStore";
+
+
+
+
+</script>
+
+
 
 <style>
 

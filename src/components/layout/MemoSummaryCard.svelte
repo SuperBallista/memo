@@ -1,12 +1,12 @@
 <script lang="ts">
-    import { moveToMemo } from "../../lib/store/viewStore";
+    import { moveToPage } from "../../lib/store/viewStore";
 export let memo
 
 </script>
 
 
 <button
-on:click={() => moveToMemo(memo.id)}
+on:click={() => moveToPage("memo", memo.id)}
 class="cursor-pointer flex justify-between items-center bg-card p-4 rounded-lg shadow-md transition-transform transform hover:-translate-y-1 hover:shadow-lg text-default no-underline"
 >
 <div class="flex flex-col gap-1">

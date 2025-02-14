@@ -5,6 +5,8 @@
     import BoxOverlay from "./lib/custom/BoxOverlay.svelte";
     import  { username }  from "./lib/store/userStore"
 
+
+
     if (localStorage.getItem("guest") === "true")
 {
  username.set("guest")

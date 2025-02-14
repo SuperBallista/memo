@@ -1,14 +1,66 @@
 <script lang="ts">
-  import MemoToolbar from "./MemoToolbar.svelte";
-  import MemoLinks from "./Parts/MemoLinks.svelte";
-  import { viewMemoCard } from "../../../lib/store/memoStore";
-  import { view } from "../../../lib/store/viewStore";
+  import MemoToolbar from "./parts/MemoToolbar.svelte";
+  import MemoLinks from "./parts/MemoLinks.svelte";
+  import { currentLine, viewMemoCard } from "../../../lib/store/memoStore";
+  import { mainColor, view } from "../../../lib/store/viewStore";
+    import { findDateFromString } from "../../../lib/utils/findDateFromString";
+    import { showMessageBox } from "../../../lib/custom/customStore";
+    import { formatDate, formatDateString } from "../../../lib/utils/formatDate";
 
-  // 본문 수정 핸들러
+
   const handleContentChange = (event: Event) => {
-    const newText = (event.target as HTMLTextAreaElement).value;
-    viewMemoCard.update(memo => ({ ...memo, content: newText }));
+  const textarea = event.target as HTMLTextAreaElement;
+  const newText = textarea.value;
+
+  // 전체 메모 내용 업데이트
+  viewMemoCard.update(memo => ({ ...memo, content: newText }));
+
+  // 현재 입력 중인 줄 감지
+  const cursorPosition = textarea.selectionStart;
+  const lines = newText.split("\n");
+  let currentRow = 0, charCount = 0;
+  let currentTextLine = "";
+
+  for (const line of lines) {
+    if (charCount + line.length >= cursorPosition) {
+      currentTextLine = line;
+      currentLine.set(line); // 현재 줄 업데이트
+      break;
+    }
+    charCount += line.length + 1; // +1은 줄바꿈 문자 고려
+    currentRow++;
+  }
+  if (currentTextLine.trim().endsWith("%%")) {
+    callFunction()
+  }
+};
+
+
+async function callFunction(){ 
+  const memoDateLog =  findDateFromString($currentLine)
+  console.log(memoDateLog)
+  if (memoDateLog)
+{ const userResponse = await showMessageBox("input",
+ "날짜 시간 기록",
+ formatDateString(memoDateLog.resultDate,"YYYY.MM.DD") + "를 메모하시겠습니까?",
+  mainColor, [{key:"date",label:"날짜시간", type: "datetime", value:memoDateLog.resultDate}])
+if (userResponse.success) {
+
+  viewMemoCard.update(card => {
+  return {
+    ...card,
+    dateTimeLink: [...card.dateTimeLink, memoDateLog.resultDate] // 🔥 새로운 배열로 업데이트
   };
+});
+
+console.log($viewMemoCard.dateTimeLink)
+
+}
+
+ }
+  }
+
+
 </script>
 
 <div class="bg-bgPrimary flex items-center justify-center p-6">

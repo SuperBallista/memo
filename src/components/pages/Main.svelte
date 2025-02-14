@@ -9,8 +9,12 @@
    import type  {sectionListInterface} from "../../lib/store/settingStore"
    import CategorySummary from "./contents/CategoryContent.svelte";
     import MemoContent from "./contents/MemoContent.svelte";
+    import Calendar from "./contents/Calendar.svelte";
 
     sectionList.set(defaultMemoSummary as sectionListInterface[])
+
+    const now = new Date(2025, 2, 14); // 2025년 3월 14일 (금요일)
+
 </script>
 <header>
 <HeaderSearch/>
@@ -21,6 +25,7 @@
 </div>
 
 <main class="lg:pl-64 lg:pt-16 h-screen">
+
     {#if $view === "summary"}
   
     <!-- 📌 Summary 제목 (가운데 정렬) -->
@@ -36,6 +41,8 @@
     <CategorySummary/>
     {:else if $view === "memo"}
     <MemoContent/>
+    {:else if $view === "calendar"}
+    <Calendar/>
     {/if}
   </main>
   

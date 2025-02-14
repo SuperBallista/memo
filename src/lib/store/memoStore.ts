@@ -20,6 +20,7 @@ export type memoType = {
   dateTimeLink: Date[];
   studentLink: number[];
   memoLink: number[];
+  filesUrl?: string[] | undefined;
 };
 
 
@@ -33,3 +34,8 @@ export const viewMemoCard = createUndoStore<memoType | null>(null)
 
 
 export let myStudent = writable<studentCache[]>([])
+
+
+export const currentLine = writable("");
+
+

@@ -8,7 +8,7 @@
     import LoadingSpinner from "./LoadingSpinner.svelte";
     import messageBoxColor from "./config/messageBoxColor.json"
   
-    let inputValues: Record<string, string> = {};
+   let inputValues: Record<string, string> = {}
       let confirmButton: HTMLButtonElement;
 
     function confirm(success: boolean) {
@@ -54,10 +54,11 @@
             {#if $messageType === "input"}
               {#each $messageInputs as input}
                 <InputBox
-                  bind:value={inputValues[input.key]}
+                  bind:value={input.value}
                   label={input.label}
                   type={(input.type || "text") as "number" | "text" | "email" | "password"}
                   placeholder={input.placeholder}
+                  on:input={(e) => inputValues[input.key] = (e.target as HTMLInputElement).value}
                 />
               {/each}
             {/if}

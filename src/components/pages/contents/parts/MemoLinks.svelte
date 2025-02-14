@@ -1,19 +1,11 @@
 <script lang="ts">
     import { myStudent, viewMemoCard } from "../../../../lib/store/memoStore";
+    import { formatDate } from "../../../../lib/utils/formatDate";
     let showDateList = false;
     let showStudentList = false;
     let showMemoList = false;
+
   
-    // 날짜 포맷 변환 함수
-    const formatDate = (date: Date) => {
-      return new Date(date).toLocaleString("ko-KR", {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-      });
-    };
   </script>
   
   <div class="flex gap-6 text-lg">
@@ -63,3 +55,14 @@
     </div>
   {/if}
   
+   <!-- 메모 상세 리스트 -->
+   {#if showMemoList}
+   <div class="mt-2 bg-card p-3 rounded">
+     <h3 class="text-lg font-semibold text-main">🔗 연결된 메모</h3>
+     <ul class="text-default text-sm list-disc pl-5">
+       {#each $viewMemoCard.memoLink as memoId}
+         <li>{$viewMemoCard.memoLink || `메모 ID: ${memoId}`}</li>
+       {/each}
+     </ul>
+   </div>
+ {/if}
