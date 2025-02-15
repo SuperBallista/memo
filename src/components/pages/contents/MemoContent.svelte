@@ -1,11 +1,12 @@
 <script lang="ts">
-  import MemoToolbar from "./parts/MemoToolbar.svelte";
-  import MemoLinks from "./parts/MemoLinks.svelte";
+  import MemoToolbar from "./parts/memo/MemoToolbar.svelte";
+  import MemoLinks from "./parts/memo/MemoLinks.svelte";
   import { currentLine, viewMemoCard } from "../../../lib/store/memoStore";
   import { mainColor, view } from "../../../lib/store/viewStore";
     import { findDateFromString } from "../../../lib/utils/findDateFromString";
     import { showMessageBox } from "../../../lib/custom/customStore";
     import { formatDate, formatDateString } from "../../../lib/utils/formatDate";
+    import Main from "../Main.svelte";
 
 
   const handleContentChange = (event: Event) => {
@@ -40,10 +41,13 @@ async function callFunction(){
   const memoDateLog =  findDateFromString($currentLine)
   console.log(memoDateLog)
   if (memoDateLog)
-{ const userResponse = await showMessageBox("input",
+{
+  try{
+  const userResponse = await showMessageBox("input",
  "날짜 시간 기록",
- formatDateString(memoDateLog.resultDate,"YYYY.MM.DD") + "를 메모하시겠습니까?",
-  mainColor, [{key:"date",label:"날짜시간", type: "datetime", value:memoDateLog.resultDate}])
+ formatDateString(memoDateLog.resultDate,"YYYY.MM.DD HH:mm") + "를 메모하시겠습니까?",
+  mainColor,
+  [{key:"date",label:"날짜시간", type: "datetime-local", value:formatDateString(memoDateLog.resultDate,"YYYY-MM-DDTHH:mm")}])
 if (userResponse.success) {
 
   viewMemoCard.update(card => {
@@ -58,6 +62,14 @@ console.log($viewMemoCard.dateTimeLink)
 }
 
  }
+catch (error){
+showMessageBox("error", "오류 발생", "오류 발생 : " + error,mainColor)
+}
+finally {
+  currentLine.set($currentLine.replace("%%",""))
+  viewMemoCard.update(memo => ({ ...memo, content: $viewMemoCard.content.replace("%%","") }));
+}
+}
   }
 
 

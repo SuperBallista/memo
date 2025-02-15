@@ -6,4 +6,3 @@ export type kindType = string
 export interface sectionListInterface {kind:kindType, list: sectionInterface[]}
 export const section = writable<sectionInterface[]>([])
 export const sectionList = writable<sectionListInterface[]>([])
-

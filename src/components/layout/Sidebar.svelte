@@ -1,6 +1,6 @@
 <script lang="ts">
     import { isSidebarOpened, view } from "../../lib/store/viewStore";
-    import CategoryItem from "./CategoryItem.svelte"; // MenuItem 컴포넌트 가져오기
+    import CategoryItem from "../pages/contents/parts/category/CategoryItem.svelte"; // MenuItem 컴포넌트 가져오기
     import defaultCategory from "../../defaultData/defaultCategory.json"
     import { myCategory } from "../../lib/store/memoStore";
   

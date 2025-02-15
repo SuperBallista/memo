@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { kindType, sectionInterface } from "../../../lib/store/settingStore";
-    import MemoSummaryCard from "../../layout/MemoSummaryCard.svelte";
+    import MemoSummaryCard from "./parts/category/MemoSummaryCard.svelte";
 
   export let list: sectionInterface[];
   export let kind: kindType;

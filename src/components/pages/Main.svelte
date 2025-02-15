@@ -10,7 +10,14 @@
    import CategorySummary from "./contents/CategoryContent.svelte";
     import MemoContent from "./contents/MemoContent.svelte";
     import Calendar from "./contents/Calendar.svelte";
+    import WeekView from "./contents/WeekView.svelte";
+    import { viewMemoCard } from "../../lib/store/memoStore";
+    import defaultMemoText from "../../defaultData/defaultMemoText.json"
+    import type { memoType } from "../../lib/types/memoTypes";
 
+    viewMemoCard.set(defaultMemoText as unknown as memoType)
+
+    
     sectionList.set(defaultMemoSummary as sectionListInterface[])
 
     const now = new Date(2025, 2, 14); // 2025년 3월 14일 (금요일)
@@ -43,6 +50,8 @@
     <MemoContent/>
     {:else if $view === "calendar"}
     <Calendar/>
+    {:else if $view === "week"}
+    <WeekView/>
     {/if}
   </main>
   

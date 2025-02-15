@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import type { memoType } from "../../lib/store/memoStore";
-    import { moveToPage } from "../../lib/store/viewStore";
+    import { moveToPage } from "../../../../../lib/store/viewStore";
+    import type { memoType } from "../../../../../lib/types/memoTypes";
 
 export let memo:memoType
 let isMobile = false; // 모바일 여부 감지

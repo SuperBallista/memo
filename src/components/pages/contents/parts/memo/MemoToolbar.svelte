@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { allCategories, viewMemoCard } from "../../../../lib/store/memoStore";
+    import { allCategories, viewMemoCard } from "../../../../../lib/store/memoStore";
     let fileInputRef: HTMLInputElement | null = null;
     let attachedFiles: File[] = [];
   

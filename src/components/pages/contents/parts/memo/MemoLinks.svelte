@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { myStudent, viewMemoCard } from "../../../../lib/store/memoStore";
-    import { formatDate } from "../../../../lib/utils/formatDate";
+    import { myStudent, viewMemoCard } from "../../../../../lib/store/memoStore";
+    import { formatDate } from "../../../../../lib/utils/formatDate";
     let showDateList = false;
     let showStudentList = false;
     let showMemoList = false;

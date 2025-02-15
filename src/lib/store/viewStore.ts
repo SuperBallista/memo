@@ -1,20 +1,22 @@
 import { writable, type Writable } from "svelte/store";
 import { createUndoStore } from "./undoStore";
-import { memoType, viewMemoCard } from "./memoStore";
-import defaultMemoText from "../../defaultData/defaultMemoText.json"
+import { monthYearWeekInterface, pageType } from "../types/viewTypes";
 
-export type pageType = "summary"| "category" | "memo" | "calendar" | "student" | "setting"
 
 export const isSidebarOpened = writable<boolean>(false)
 export const view = createUndoStore<pageType>("summary")
 export const selectedCategoryId = writable<number | null>(null)
 export const viewCategoryId = writable<number | null>(null)
 export const viewCategoryName = writable<string | null>(null)
+export const viewPageNumber = writable<number | null>(null)
+export const viewMonthYearWeek = writable<monthYearWeekInterface | null>(null)
 
-export async function moveToPage(page:pageType , pageNumber:number){
+
+export async function moveToPage(page:pageType , pageNumber?:number){
 view.set(page)
-viewMemoCard.set(defaultMemoText as unknown as memoType) // 임시 자료 로드
+viewPageNumber.set(pageNumber)
 }
 
 export const mainColor = "#2563EB"
 
+export const selectedDate = writable<Date | null>(null)

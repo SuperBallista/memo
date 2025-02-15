@@ -1,5 +1,5 @@
 <script context="module">
-  import { selectedCategoryId, view, viewCategoryId, viewCategoryName } from "../../lib/store/viewStore";
+  import { selectedCategoryId, view, viewCategoryId, viewCategoryName } from "../../../../../lib/store/viewStore";
   import CategoryItem from "./CategoryItem.svelte"; // ✅ 자기 자신을 import
 </script>
 

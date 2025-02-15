@@ -1,7 +1,7 @@
 <script lang="ts">
   import defaultCategoryContent from "../../../defaultData/defaultCategoryContent.json";
   import { viewCategoryName } from "../../../lib/store/viewStore";
-    import MemoCard from "../../layout/MemoCard.svelte";
+    import MemoCard from "./parts/category/MemoCard.svelte";
 
   let memoes = defaultCategoryContent.map(memo => ({
     ...memo,
@@ -9,7 +9,7 @@
   }));
 </script>
 
-<div class="p-4 bg-bgPrimary">
+<div class="p-8 bg-bgPrimary">
   <!-- 카테고리 제목 -->
   <h2 class="text-xl md:text-4xl font-bold text-main mb-6 text-center">{$viewCategoryName}</h2>
 

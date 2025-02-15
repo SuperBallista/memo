@@ -1,6 +1,7 @@
 import { writable } from "svelte/store";
 import defaultAllCategories from "../../defaultData/defaultAllCategories.json"
 import { createUndoStore } from "./undoStore";
+import { memoType, studentCache } from "../types/memoTypes";
 
 //카테고리 상태스토어
 export const myCategory = writable<categoryInterface[]>([])
@@ -11,24 +12,6 @@ export interface categoryInterface { id:number, name:string, children: categoryI
 export const selectedCategory = writable<number | null>(null);
 
 
-export type memoType = {
-  id: number;
-  title: string;
-  content: string;
-  category: number;
-  orderNum: number;
-  dateTimeLink: Date[];
-  studentLink: number[];
-  memoLink: number[];
-  filesUrl?: string[] | undefined;
-};
-
-
-export type studentCache = {
-id: number,
-name: string,
-class: string
-}
 
 export const viewMemoCard = createUndoStore<memoType | null>(null)
 
