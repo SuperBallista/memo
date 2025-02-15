@@ -121,8 +121,8 @@
     <!-- 주별 버튼 + 날짜 -->
     <div class="flex flex-col mt-4 flex-1">
       {#each weeks as week, index}
-  <!-- 모바일 전용 주별 버튼 (위에 배치, 기능 없음) -->
-  <div class="md:hidden flex justify-right w-full mb-1">
+
+      <div class="md:hidden flex justify-right w-full mb-1">
     <button 
       class="w-5 h-5 bg-button text-white text-xs rounded-md transition-all hover:bg-accent"
       on:touchstart={() => handleMouseOver(index)}
